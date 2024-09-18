@@ -1,0 +1,5 @@
+node_modules/
+packge-lock.json
+packge.json
+.env
+.DS_Store
