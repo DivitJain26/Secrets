@@ -1,5 +1,5 @@
 node_modules/
-packge-lock.json
-packge.json
+package-lock.json
+package.json
 .env
 .DS_Store

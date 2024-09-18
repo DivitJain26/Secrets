@@ -27,7 +27,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB");
+// mongoose.connect("mongodb://localhost:27017/userDB");
+mongoose.connect(process.env.MONGODB_URL);
+
 // mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
@@ -40,7 +42,9 @@ const userSchema = new mongoose.Schema({
     secret: String
 });
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose,{
+    usernameUnique: false 
+});
 
 const User = new mongoose.model("User", userSchema);
 
@@ -73,6 +77,7 @@ passport.use(new GoogleStrategy({
 
         const newUser = await User.create({
             googleId: profile.id,
+            // username: profile.id,
             name: profile.displayName,
             email: profile.emails[0].value,
             provider: profile.provider
@@ -109,6 +114,7 @@ passport.use(new FacebookStrategy({
 
         const newUser = await User.create({
             facebookId: profile.id,
+            // username: profile.id,
             name: profile.displayName,
             // email: profile.emails[0].value,
             provider: profile.provider
