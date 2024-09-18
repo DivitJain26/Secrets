@@ -207,7 +207,8 @@ app.get("/logout", (req, res) => {
 
 ////////////////////////////////////////////////// GOOGLE LOGIN ///////////////////////////////////////
 
-app.get('/auth/google',
+// app.get('/auth/google',
+app.get('/:3000/auth/google/secrets',
     passport.authenticate('google', { scope: ['profile', "email"] })
 );
 
