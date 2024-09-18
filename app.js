@@ -26,13 +26,13 @@ app.use(express.static("public"));
 // }));
 
 app.use(session({
-    cookie: { maxAge: 86400000 },
+    cookie: { maxAge: 86400000, secure: false },
     store: new MemoryStore({
       checkPeriod: 86400000 // prune expired entries every 24h
     }),
     resave: false,
     saveUninitialized: true,
-    secret: process.env.SECRET
+    secret: process.env.SECRET || 'defaultSecret'
 }))
 
 app.use(passport.initialize());
@@ -286,6 +286,6 @@ app.route("/register")
 
     });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("Server started on port 3000");
 });
