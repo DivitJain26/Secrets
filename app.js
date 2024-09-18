@@ -150,6 +150,8 @@ app.get("/", (req, res) => {
 ////////////////////////////////////////////////// SECRETS ///////////////////////////////////////
 
 app.get("/secrets", async (req, res) => {
+    if(req.isAuthenticated()) {
+        res.render("secrets")
         try {
             const foundUser = await User.find({"secret": {$ne: null}});
             if(foundUser) {
@@ -158,6 +160,9 @@ app.get("/secrets", async (req, res) => {
         } catch (error) {
             console.log(error.message)
         }
+    } else {
+        res.redirect("/login")
+    }  
 })
 
 ////////////////////////////////////////////////// SUBMIT ///////////////////////////////////////
