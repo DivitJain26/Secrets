@@ -151,7 +151,7 @@ app.get("/", (req, res) => {
 
 app.get("/secrets", async (req, res) => {
     if(req.isAuthenticated()) {
-        res.render("secrets")
+        // res.render("secrets")
         try {
             const foundUser = await User.find({"secret": {$ne: null}});
             if(foundUser) {
