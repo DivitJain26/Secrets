@@ -207,12 +207,12 @@ app.get("/logout", (req, res) => {
 
 ////////////////////////////////////////////////// GOOGLE LOGIN ///////////////////////////////////////
 
-// app.get('/auth/google',
-app.get('/:3000/auth/google/secrets',
+app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', "email"] })
 );
 
-app.get('/auth/google/secrets', 
+// app.get('/auth/google/secrets', 
+app.get('/:3000/auth/google/secrets',
     passport.authenticate('google', { failureRedirect: '/login' }),
     function(req, res) {
       // Successful authentication, redirect secrets.
